@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-    <GuideList />
+  <div class="home container">
+    <div class="card-panel center">
+      <h2 class="grey-text display-2">Guide List</h2>
+      <GuideList />
+    </div>
   </div>
 </template>
 
