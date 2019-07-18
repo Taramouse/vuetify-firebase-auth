@@ -9,7 +9,7 @@
           <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
         </li>
         <li class="logged-in">
-          <a href="#" class="grey-text" id="logout">Logout</a>
+          <a @click.prevent="logout" class="grey-text" id="logout">Logout</a>
         </li>
         <li class="logged-in">
           <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
@@ -26,8 +26,20 @@
 </template>
 
 <script>
+// eslint-disable-next-line
+import { db, auth } from '@/firebase/init'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    logout () {
+      auth.signOut().then(() => {
+        console.log('User signed out')
+      }).catch((err) => {
+        console.log(err.message)
+      })
+    }
+  }
 }
 </script>
 
