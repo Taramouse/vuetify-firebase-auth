@@ -23,7 +23,12 @@
 
 <script>
 export default {
-  name: 'GuideList'
+  name: 'GuideList',
+  mounted () {
+    const items = document.querySelectorAll('.collapsible')
+    // eslint-disable-next-line
+    M.Collapsible.init(items)
+  }
 }
 </script>
 
