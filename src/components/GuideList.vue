@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-top: 40px;">
+  <div id="guide-list" class="container">
     <ul class="collapsible z-depth-0 guides" style="border: none;">
       <li>
         <div class="collapsible-header grey lighten-4">Guide title</div>
@@ -28,4 +28,7 @@ export default {
 </script>
 
 <style>
+#guide-list {
+  margin-top: 40px;
+}
 </style>
