@@ -1,5 +1,5 @@
 <template>
-  <div class="home grey lighten-3">
+  <div class="home">
     <h2>Home</h2>
   </div>
 </template>
@@ -8,6 +8,6 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home'
+  name: 'Home'
 }
 </script>

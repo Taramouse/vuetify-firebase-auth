@@ -16,4 +16,9 @@ export default {
 </script>
 
 <style>
+body {
+  background: #666;
+  min-height: 100%;
+  width: 100%;
+}
 </style>
