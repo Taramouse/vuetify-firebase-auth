@@ -35,7 +35,6 @@ export default {
     login () {
       auth.signInWithEmailAndPassword(this.email, this.password).then(cred => {
         this.feedback = null
-        console.log(cred.user)
         this.$router.push({ name: 'Home' })
       }).catch((err) => {
         this.feedback = err.message

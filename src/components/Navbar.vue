@@ -5,20 +5,20 @@
         <img src="@/assets/logo.svg" alt="logo" style="width: 180px; margin-top: 10px">
       </router-link>
       <ul id="nav-mobile" class="right hide-on-small-and-down">
-        <li class="logged-in">
+        <li v-if="loggedIn">
           <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
         </li>
-        <li class="logged-in">
-          <a @click.prevent="logout" class="grey-text" id="logout">Logout</a>
-        </li>
-        <li class="logged-in">
+        <li v-if="loggedIn">
           <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
         </li>
-        <li class="logged-out">
-          <router-link :to="{ name: 'Login' }" class="grey-text">Login</router-link>
+        <li v-if="loggedIn">
+          <a @click.prevent="logout" class="grey-text" id="logout">Logout</a>
         </li>
-        <li class="logged-out">
+        <li v-if="!loggedIn">
           <router-link :to="{ name: 'Signup' }" class="grey-text">Sign up</router-link>
+        </li>
+        <li v-if="!loggedIn">
+          <router-link :to="{ name: 'Login' }" class="grey-text">Login</router-link>
         </li>
       </ul>
     </div>
@@ -31,14 +31,26 @@ import { db, auth } from '@/firebase/init'
 
 export default {
   name: 'Navbar',
+  data () {
+    return {
+      loggedIn: false
+    }
+  },
   methods: {
     logout () {
-      auth.signOut().then(() => {
-        console.log('User signed out')
-      }).catch((err) => {
-        console.log(err.message)
-      })
+      auth.signOut()
     }
+  },
+  created () {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.loggedIn = true
+        console.log('User logged in:', user.email)
+      } else {
+        this.loggedIn = false
+        console.log('User logged out')
+      }
+    })
   }
 }
 </script>

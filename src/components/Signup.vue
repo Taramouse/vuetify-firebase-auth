@@ -34,7 +34,6 @@ export default {
   methods: {
     signup () {
       auth.createUserWithEmailAndPassword(this.email, this.password).then(cred => {
-        console.log(cred.user)
         this.feedback = null
         this.$router.push({ name: 'Home' })
       }).catch(err => {
