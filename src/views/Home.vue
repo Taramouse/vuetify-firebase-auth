@@ -18,3 +18,8 @@ export default {
   }
 }
 </script>
+<style>
+.home .card-panel {
+  min-height: 500px;
+}
+</style>
