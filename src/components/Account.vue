@@ -4,7 +4,10 @@
       <h4>Account details</h4>
       <br />
       <div class="account-details">
-        <h4>User: {{ user.email }}</h4>
+        <div>
+          <h4 v-if="user">User: {{ user.email }}</h4>
+          <h4 v-else class="red-text">No user logged in</h4>
+        </div>
       </div>
     </div>
   </div>
