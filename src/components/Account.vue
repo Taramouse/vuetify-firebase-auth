@@ -16,9 +16,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Account',
   computed: {
-    // user () {
-    //   return this.$store.state.user
-    // }
     ...mapGetters(['user'])
   }
 }
