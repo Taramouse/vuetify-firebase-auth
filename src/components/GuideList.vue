@@ -1,6 +1,10 @@
 <template>
   <div id="guide-list" class="container">
-    <h3 v-if="!user">Please log in or sign up to see our guides</h3>
+    <div v-if="!user">
+      <h3>Welcome to Game Guidez</h3>
+      <p>Please log in or sign up to see our guides</p>
+    </div>
+
     <ul v-if="user" class="collapsible z-depth-0 guides" style="border: none;">
       <li v-for="(guide, index) in guides" :key="index">
         <div class="collapsible-header grey lighten-4">{{ guide.title }}</div>
@@ -23,7 +27,7 @@ export default {
   computed: {
     ...mapGetters(['user'])
   },
-  mounted () {
+  updated () {
     // Materialize JS accessed via M
     const collapsible = document.querySelectorAll('.collapsible')
     // eslint-disable-next-line
