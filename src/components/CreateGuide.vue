@@ -47,6 +47,7 @@ export default {
         this.feedback = null
         this.$router.push({ name: 'Home' })
       }).catch(err => {
+        console.log(err.message)
         this.feedback = err.message
       })
     }
