@@ -2,7 +2,7 @@
   <div id="guide-list" class="container">
     <div v-if="!user">
       <h3>Welcome to Game Guidez</h3>
-      <p>Please log in or sign up to see our guides</p>
+      <p class="red-text">Please log in or sign up to see our guides</p>
     </div>
 
     <ul v-if="user" class="collapsible z-depth-0 guides" style="border: none;">
