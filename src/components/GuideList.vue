@@ -25,6 +25,7 @@
 export default {
   name: 'GuideList',
   mounted () {
+    // Materialize JS accessed via M
     const items = document.querySelectorAll('.collapsible')
     // eslint-disable-next-line
     M.Collapsible.init(items)
