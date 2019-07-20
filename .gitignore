@@ -3,6 +3,7 @@ node_modules
 /dist
 /src/firebase/init.js
 /src/firebase/firebaseAuthPlugin.js
+/src/firebase/firestoreInit.js
 
 # local env files
 .env.local
