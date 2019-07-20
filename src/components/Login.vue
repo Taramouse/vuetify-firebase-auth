@@ -20,7 +20,7 @@
 
 <script>
 // eslint-disable-next-line
-import { db, auth } from '@/firebase/init'
+import EventBus from '@/eventBus'
 
 export default {
   name: 'Login',
@@ -33,11 +33,12 @@ export default {
   },
   methods: {
     login () {
-      auth.signInWithEmailAndPassword(this.email, this.password).then(cred => {
-        this.feedback = null
-        this.$router.push({ name: 'Home' })
-      }).catch((err) => {
-        this.feedback = err.message
+      this.$auth.login(this.email, this.password)
+      EventBus.$on('ERROR_MESSAGE', payload => {
+        this.feedback = payload
+        if (!this.feedback) {
+          this.$router.push({ name: 'Home' })
+        }
       })
     }
   }

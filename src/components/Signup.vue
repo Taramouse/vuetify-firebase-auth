@@ -19,8 +19,8 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-import { db, auth } from '@/firebase/init'
+// import { mapGetters } from 'vuex'
+import EventBus from '@/eventBus'
 
 export default {
   name: 'Signup',
@@ -31,15 +31,22 @@ export default {
       feedback: null
     }
   },
+  computed: {
+    //  ...mapGetters(['errorMessage'])
+  },
   methods: {
     signup () {
-      auth.createUserWithEmailAndPassword(this.email, this.password).then(cred => {
-        this.feedback = null
-        this.$router.push({ name: 'Home' })
-      }).catch(err => {
-        this.feedback = err.message
+      this.$auth.signup(this.email, this.password)
+      EventBus.$on('ERROR_MESSAGE', payload => {
+        this.feedback = payload
+        if (!this.feedback) {
+          this.$router.push({ name: 'Home' })
+        }
       })
     }
+  },
+  mounted () {
+
   }
 }
 </script>

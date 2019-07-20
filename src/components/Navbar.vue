@@ -5,19 +5,19 @@
         <img src="@/assets/logo.svg" alt="logo" style="width: 180px; margin-top: 10px">
       </router-link>
       <ul id="nav-mobile" class="right hide-on-small-and-down">
-        <li v-if="loggedIn">
+        <li v-if="user">
           <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
         </li>
-        <li v-if="loggedIn">
+        <li v-if="user">
           <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
         </li>
-        <li v-if="loggedIn">
+        <li v-if="user">
           <a @click.prevent="logout" class="grey-text" id="logout">Logout</a>
         </li>
-        <li v-if="!loggedIn">
+        <li v-if="!user">
           <router-link :to="{ name: 'Signup' }" class="grey-text">Sign up</router-link>
         </li>
-        <li v-if="!loggedIn">
+        <li v-if="!user">
           <router-link :to="{ name: 'Login' }" class="grey-text">Login</router-link>
         </li>
       </ul>
@@ -27,30 +27,21 @@
 
 <script>
 // eslint-disable-next-line
-import { db, auth } from '@/firebase/init'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Navbar',
   data () {
     return {
-      loggedIn: false
     }
   },
   methods: {
     logout () {
-      auth.signOut()
+      this.$auth.logout()
     }
   },
-  created () {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.loggedIn = true
-        console.log('User logged in:', user.email)
-      } else {
-        this.loggedIn = false
-        console.log('User logged out')
-      }
-    })
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>
