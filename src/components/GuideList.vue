@@ -1,5 +1,6 @@
 <template>
   <div id="guide-list" class="container">
+    <h3 v-if="!user">Please log in or sign up to see our guides</h3>
     <ul v-if="user" class="collapsible z-depth-0 guides" style="border: none;">
       <li v-for="(guide, index) in guides" :key="index">
         <div class="collapsible-header grey lighten-4">{{ guide.title }}</div>
