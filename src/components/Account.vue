@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex''
 
 export default {
   name: 'Account',
@@ -32,12 +32,14 @@ export default {
     ...mapGetters(['user'])
   },
   mounted () {
-    this.$db.collection('users').doc(this.user.uid).get().then(doc => {
-      this.bio = doc.data().bio
-      this.feedback = null
-    }).catch(err => {
-      this.feedback(err.message)
-    })
+    if (this.$store.state.user) {
+      this.$db.collection('users').doc(this.user.uid).get().then(doc => {
+        this.bio = doc.data().bio
+        this.feedback = null
+      }).catch(err => {
+        this.feedback(err.message)
+      })
+    }
   }
 }
 </script>
