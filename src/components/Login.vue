@@ -1,6 +1,6 @@
 <template>
   <div id="login" class="container">
-    <div class="card-panel">
+    <div class="card-panel center">
       <h4>Login</h4><br />
       <form id="login-form" @submit.prevent="login">
         <div class="input-field">
@@ -47,7 +47,7 @@ export default {
 
 <style>
 #login {
-  padding-top: 60px;
+  padding-top: 30px;
   width: 500px;
 }
 </style>
