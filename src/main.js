@@ -4,10 +4,10 @@ import store from './store'
 import router from './router'
 import 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/js/materialize.min'
-import FirebaseAuthPlugin from '@/firebase/firebaseAuthPlugin'
+import FirebasePlugin from '@/firebase/firebasePlugin'
 
 Vue.config.productionTip = false
-Vue.use(FirebaseAuthPlugin)
+Vue.use(FirebasePlugin)
 
 new Vue({
   router,
