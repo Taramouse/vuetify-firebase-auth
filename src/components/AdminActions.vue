@@ -7,13 +7,15 @@
         <button class="btn-small yellow darken-2 z-depth-0">Make Admin</button>
       </form>
     </div>
-
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import firebase from 'firebase/app'
+// eslint-disable-next-line
+// TODO: Is this really needed?
+import functions from 'firebase/functions'
 
 export default {
   name: 'AdminActions',
@@ -32,7 +34,10 @@ export default {
       // use our makeAdminRole firebase function defined in functions/index.js
       const addAdminRole = firebase.functions().httpsCallable('addAdminRole')
       addAdminRole({ email: this.email }).then(result => {
-        this.feedback = result
+        this.feedback = result.data.message
+      }).catch(err => {
+        console.log(err)
+        this.feedback = err.message
       })
     }
   }
