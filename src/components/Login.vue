@@ -1,6 +1,6 @@
 <template>
   <div id="login" class="container">
-    <div class="card-panel">
+    <div class="card-panel center">
       <h4>Login</h4><br />
       <form id="login-form" @submit.prevent="login">
         <div class="input-field">
@@ -20,7 +20,7 @@
 
 <script>
 // eslint-disable-next-line
-import { db, auth } from '@/firebase/init'
+import EventBus from '@/eventBus'
 
 export default {
   name: 'Login',
@@ -33,11 +33,12 @@ export default {
   },
   methods: {
     login () {
-      auth.signInWithEmailAndPassword(this.email, this.password).then(cred => {
-        this.feedback = null
-        this.$router.push({ name: 'Home' })
-      }).catch((err) => {
-        this.feedback = err.message
+      this.$auth.login(this.email, this.password)
+      EventBus.$on('ERROR_MESSAGE', payload => {
+        this.feedback = payload
+        if (!this.feedback) {
+          this.$router.push({ name: 'Home' })
+        }
       })
     }
   }
@@ -46,7 +47,7 @@ export default {
 
 <style>
 #login {
-  padding-top: 60px;
+  padding-top: 30px;
   width: 500px;
 }
 </style>
