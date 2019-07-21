@@ -1,4 +1,4 @@
-# firebase-auth - pull request test
+# firebase-auth
 
 ## Project setup
 ```
