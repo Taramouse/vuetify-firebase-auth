@@ -7,8 +7,9 @@
         <div v-if="user" class="left-align">
           <h4 class="grey-text">User: <span class="grey-text text-darken-2">{{ user.email }}</span></h4>
           <h4 class="grey-text">Bio: <span class="grey-text text-darken-2">{{ bio }}</span></h4>
+          <p v-if="feedback" class="red-text">{{ feedback }}</p>
         </div>
-        <div v-else>
+        <div v-if="!user">
           <h4 class="red-text">No user logged in</h4>
         </div>
       </div>
@@ -23,17 +24,19 @@ export default {
   name: 'Account',
   data () {
     return {
-      bio: null
+      bio: null,
+      feedback: null
     }
   },
   computed: {
     ...mapGetters(['user'])
   },
-  created () {
+  mounted () {
     this.$db.collection('users').doc(this.user.uid).get().then(doc => {
       this.bio = doc.data().bio
+      this.feedback = null
     }).catch(err => {
-      console.log(err.message)
+      this.feedback(err.message)
     })
   }
 }
