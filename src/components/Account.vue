@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Account',
@@ -29,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapState(['user'])
   },
   mounted () {
     if (this.$store.state.user) {

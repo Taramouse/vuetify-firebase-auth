@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreateGuide',
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapState(['user'])
   },
   methods: {
     saveGuide () {

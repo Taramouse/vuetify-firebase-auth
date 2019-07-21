@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GuideList',
@@ -25,7 +25,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapState(['user'])
   },
   updated () {
     // Materialize JS accessed via M
