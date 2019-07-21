@@ -36,9 +36,6 @@ export default {
       feedback: null
     }
   },
-  computed: {
-    //  ...mapGetters(['errorMessage'])
-  },
   methods: {
     signup () {
       this.$auth.signup(this.email, this.password, this.bio)
