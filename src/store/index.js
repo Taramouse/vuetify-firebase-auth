@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     updateUser: (state, payload) => {
-      state.user = payload.user
+      state.user = payload
     }
   },
   actions: {
