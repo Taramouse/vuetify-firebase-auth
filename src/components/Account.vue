@@ -4,9 +4,12 @@
       <h4>Account details</h4>
       <br />
       <div class="account-details">
-        <div>
-          <h4 v-if="user">User: {{ user.email }}</h4>
-          <h4 v-else class="red-text">No user logged in</h4>
+        <div v-if="user" class="left-align">
+          <h4 class="grey-text">User: <span class="grey-text text-darken-2">{{ user.email }}</span></h4>
+          <h4 class="grey-text">Bio: <span class="grey-text text-darken-2">{{ bio }}</span></h4>
+        </div>
+        <div v-else>
+          <h4 class="red-text">No user logged in</h4>
         </div>
       </div>
     </div>
@@ -18,8 +21,20 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Account',
+  data () {
+    return {
+      bio: null
+    }
+  },
   computed: {
     ...mapGetters(['user'])
+  },
+  created () {
+    this.$db.collection('users').doc(this.user.uid).get().then(doc => {
+      this.bio = doc.data().bio
+    }).catch(err => {
+      console.log(err.message)
+    })
   }
 }
 </script>
