@@ -4,13 +4,14 @@
 //   	// match logged in user doc in users collection
 //     match /users/{userId} {
 //       // allow create new doc when signing up
-//       allow create: if request.auth.uid != null
+//       allow create: if request.auth.uid != null;
 //       // allow read if doc created by user
-//       allow read: if request.auth.uid == userId
+//       allow read: if request.auth.uid == userId;
 //     }
 //     // only allow access to guides if logged in
 //     match /guides/{guideId} {
-//       allow read, write: if request.auth.uid != null;
+//       allow read: if request.auth.uid != null;
+//       allow write: if request.auth.token == true;
 //     }
 //   }
 // }
