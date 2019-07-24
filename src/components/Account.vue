@@ -5,8 +5,9 @@
       <br />
       <div class="account-details">
         <div v-if="user" class="left-align">
-          <h4 class="grey-text">User: <span class="grey-text text-darken-2">{{ user.email }}</span></h4>
-          <h4 class="grey-text">Bio: <span class="grey-text text-darken-2">{{ bio }}</span></h4>
+          <h4 class="grey-text">User: <span class="grey-text text-darken-2 right">{{ user.email }}</span></h4>
+          <h4 class="grey-text">Bio: <span class="grey-text text-darken-2 right">{{ bio }}</span></h4>
+          <h4 class="grey-text">Member Status: <span class="grey-text text-darken-2 right">{{ adminStatus }}</span></h4>
           <p v-if="feedback" class="red-text">{{ feedback }}</p>
         </div>
         <div v-if="!user">
@@ -18,29 +19,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Account',
   data () {
     return {
       bio: null,
-      feedback: null
+      feedback: null,
+      adminStatus: null
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapGetters(['user', 'admin'])
   },
   mounted () {
-    if (this.$store.state.user) {
+    if (this.user) {
       this.$db.collection('users').doc(this.user.uid).get().then(doc => {
         this.bio = doc.data().bio
         this.feedback = null
       }).catch(err => {
         this.feedback(err.message)
       })
+      this.adminStatus = this.admin ? 'Admin' : 'User'
+    } else {
+      this.adminStatus = 'User'
     }
   }
+
 }
 </script>
 

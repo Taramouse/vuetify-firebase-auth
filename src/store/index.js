@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: null
+    user: null,
+    admin: null
   },
   mutations: {
     updateUser: (state, payload) => {
       state.user = payload
+    },
+    updateAdmin: (state, payload) => {
+      state.admin = payload
     }
   },
   actions: {
@@ -18,6 +22,9 @@ const store = new Vuex.Store({
   getters: {
     user: (state) => {
       return state.user
+    },
+    admin: (state) => {
+      return state.admin
     }
   }
 })

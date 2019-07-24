@@ -1,8 +1,8 @@
 import store from '@/store'
 import Firebase from 'firebase/app'
 import EventBus from '@/eventBus'
-require('firebase/firestore')
-require('firebase/auth')
+import 'firebase/firestore'
+import 'firebase/auth'
 
 const config = {
   // enter your firebase project config here
@@ -52,9 +52,13 @@ export default {
       }
     }
     auth.onAuthStateChanged(user => {
-      // TODO: Check this observable is added to store as user correctl
-      console.log(user, 'user state changed')
-      store.commit('updateUser', user)
+      // console.log(user, 'user state changed')
+      if (user) {
+        store.commit('updateUser', user)
+        console.log(user.email, 'logged in')
+      } else {
+        store.commit('updateUser', null)
+      }
     })
   }
 }

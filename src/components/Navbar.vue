@@ -8,7 +8,7 @@
         <li v-if="user">
           <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
         </li>
-        <li v-if="user">
+        <li v-if="admin">
           <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
         </li>
         <li v-if="user">
@@ -27,21 +27,23 @@
 
 <script>
 // eslint-disable-next-line
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
   data () {
     return {
+
     }
   },
   methods: {
     logout () {
       this.$auth.logout()
+      this.$router.push({ name: 'Login' })
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapGetters(['user', 'admin'])
   }
 }
 </script>
