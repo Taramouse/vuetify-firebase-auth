@@ -23,13 +23,12 @@ export default {
   data () {
     return {
       email: '',
-      admin: true,
       feedback: null,
       loading: null
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user', 'admin'])
   },
   methods: {
     addAdmin () {

@@ -8,7 +8,7 @@
         <li v-if="user">
           <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
         </li>
-        <li v-if="user">
+        <li v-if="admin">
           <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
         </li>
         <li v-if="user">
@@ -33,6 +33,7 @@ export default {
   name: 'Navbar',
   data () {
     return {
+
     }
   },
   methods: {
@@ -41,7 +42,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user', 'admin'])
   }
 }
 </script>
