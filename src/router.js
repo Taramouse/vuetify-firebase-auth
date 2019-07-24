@@ -7,7 +7,6 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -33,24 +32,25 @@ const router = new Router({
     {
       path: '/account',
       name: 'Account',
+      meta: {
+        authRequired: true
+      },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "Account" */ './components/Account.vue'),
-      meta: {
-        authRequired: true
-      }
+      component: () => import(/* webpackChunkName: "Account" */ './components/Account.vue')
+
     },
     {
       path: '/create-guide',
       name: 'CreateGuide',
+      meta: {
+        authRequired: true
+      },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "CreateGuide" */ './components/CreateGuide.vue'),
-      meta: {
-        authRequired: true
-      }
+      component: () => import(/* webpackChunkName: "CreateGuide" */ './components/CreateGuide.vue')
     }
   ]
 })
