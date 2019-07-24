@@ -54,10 +54,20 @@ export default {
     auth.onAuthStateChanged(user => {
       // console.log(user, 'user state changed')
       if (user) {
-        store.commit('updateUser', user)
         console.log(user.email, 'logged in')
+        store.commit('updateUser', user)
+        // get our custom claim (role) set by function addAdminRole
+        user.getIdTokenResult().then(idTokenResult => {
+          user.admin = idTokenResult.claims.admin
+          if (user.admin) {
+            store.commit('updateAdmin', true)
+          } else {
+            store.commit('updateAdmin', null)
+          }
+        })
       } else {
         store.commit('updateUser', null)
+        store.commit('updateAdmin', null)
       }
     })
   }
