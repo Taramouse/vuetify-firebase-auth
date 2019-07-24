@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user" class="admin-actions container">
+  <div v-if="admin" class="admin-actions container">
     <div class="center">
       <form @submit.prevent="addAdmin">
         <input type="email" placeholder="User Email" v-model="email" required>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import firebase from 'firebase/app'
 import 'firebase/functions'
 
@@ -28,7 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user', 'admin'])
+    ...mapGetters(['user', 'admin'])
   },
   methods: {
     addAdmin () {

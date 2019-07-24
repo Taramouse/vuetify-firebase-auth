@@ -27,7 +27,7 @@
 
 <script>
 // eslint-disable-next-line
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
@@ -39,10 +39,11 @@ export default {
   methods: {
     logout () {
       this.$auth.logout()
+      this.$router.push({ name: 'Login' })
     }
   },
   computed: {
-    ...mapState(['user', 'admin'])
+    ...mapGetters(['user', 'admin'])
   }
 }
 </script>

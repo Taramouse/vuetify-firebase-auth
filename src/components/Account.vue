@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Account',
@@ -31,10 +31,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user', 'admin'])
+    ...mapGetters(['user', 'admin'])
   },
   mounted () {
-    if (this.$store.state.user) {
+    if (this.user) {
       this.$db.collection('users').doc(this.user.uid).get().then(doc => {
         this.bio = doc.data().bio
         this.feedback = null
