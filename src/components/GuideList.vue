@@ -5,11 +5,7 @@
         <h1 class="display-2 mb-3">
           Welcome to Game Guidez
         </h1>
-      </v-flex>
-
-      <v-flex v-if="!user">
-        <h3></h3>
-        <p class="red-text">Please log in or sign up to see our guides</p>
+        <p v-if="!user">Please log in or sign up to see our guides</p>
       </v-flex>
 
       <v-card v-if="user" class="mx-auto">
