@@ -1,28 +1,28 @@
 <template>
-  <nav class="z-depth-0 grey lighten-4">
-    <div class="nav-wrapper container">
-      <router-link :to="{name: 'Home' }" class="brand-logo left">
-        <img src="@/assets/logo.svg" alt="logo" style="width: 180px; margin-top: 10px">
+  <v-app-bar color="deep-purple accent-4" dark>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-toolbar-title>
+      <router-link :to="{name: 'Home' }">
+        <v-img src="@/assets/logo.svg" alt="logo" width="180"></v-img>
       </router-link>
-      <ul id="nav-mobile" class="right hide-on-small-and-down">
-        <li v-if="user">
-          <router-link :to="{ name: 'Account' }" class="grey-text">Account</router-link>
-        </li>
-        <li v-if="admin">
-          <router-link :to="{ name: 'CreateGuide' }" class="grey-text">Create Guide</router-link>
-        </li>
-        <li v-if="user">
-          <a @click.prevent="logout" class="grey-text" id="logout">Logout</a>
-        </li>
-        <li v-if="!user">
-          <router-link :to="{ name: 'Signup' }" class="grey-text">Sign up</router-link>
-        </li>
-        <li v-if="!user">
-          <router-link :to="{ name: 'Login' }" class="grey-text">Login</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text v-if="user" :to="{ name: 'Account' }">
+      <span class="mr-2">Account</span>
+    </v-btn>
+    <v-btn text v-if="admin" :to="{ name: 'CreateGuide' }">
+      <span class="mr-2">Create Guide</span>
+    </v-btn>
+    <v-btn text v-if="user" @click.prevent="logout">
+      <span class="mr-2">Logout</span>
+    </v-btn>
+    <v-btn text v-if="!user" :to="{ name: 'SignUp' }">
+      <span class="mr-2">Sign Up</span>
+    </v-btn>
+    <v-btn text v-if="!user" :to="{ name: 'Login' }">
+      <span class="mr-2">Login</span>
+    </v-btn>
+  </v-app-bar>
 </template>
 
 <script>
