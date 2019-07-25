@@ -1,10 +1,7 @@
 <template>
-  <div class="home container">
-    <div class="card-panel center">
-      <h2 class="grey-text display-2">Guide List</h2>
-      <AdminActions />
-      <GuideList />
-    </div>
+  <div class="home">
+    <AdminActions />
+    <GuideList />
   </div>
 </template>
 
@@ -21,8 +18,6 @@ export default {
   }
 }
 </script>
+
 <style>
-.home .card-panel {
-  min-height: 500px;
-}
 </style>
