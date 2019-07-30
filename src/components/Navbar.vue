@@ -16,7 +16,7 @@
     <v-btn text v-if="user" @click.prevent="logout">
       <span class="mr-2">Logout</span>
     </v-btn>
-    <v-btn text v-if="!user" :to="{ name: 'SignUp' }">
+    <v-btn text v-if="!user" :to="{ name: 'Signup' }">
       <span class="mr-2">Sign Up</span>
     </v-btn>
     <v-btn text v-if="!user" :to="{ name: 'Login' }">
