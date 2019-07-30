@@ -1,15 +1,11 @@
 <template>
-  <v-container>
-    <v-layout text-center wrap>
-      <v-flex mb-4>
-        <h1 class="display-2 mb-3">
-          Welcome to Game Guidez
-        </h1>
-        <p v-if="!user">Please log in or sign up to see our guides</p>
-      </v-flex>
-
-      <v-card v-if="user" class="mx-auto">
-        <v-list width="600">
+  <v-flex xs-12 md-4 left>
+    <v-card v-if="user" width="600" class="mx-auto" :loading="loading">
+      <v-card-title>
+        <h3>Game Guides</h3>
+      </v-card-title>
+      <v-card-text>
+        <v-list>
           <v-list-group v-for="(guide, index) in guides" :key="index" no-action>
 
             <template v-slot:activator>
@@ -26,29 +22,36 @@
 
           </v-list-group>
         </v-list>
-      </v-card>
-    </v-layout>
-  </v-container>
+      </v-card-text>
+    </v-card>
+  </v-flex>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'GuideList',
   data () {
     return {
-      guides: []
+      guides: [],
+      loading: false,
+      feedback: null
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapGetters(['user'])
   },
   created () {
+    this.loading = true
     this.$db.collection('guides').get().then(snapshot => {
+      this.loading = false
       snapshot.forEach(doc => {
         this.guides.push(doc.data())
       })
+    }).catch(err => {
+      this.loading = false
+      console.log(err.message)
     })
   }
 }
