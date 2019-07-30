@@ -1,30 +1,37 @@
 <template>
-  <div v-if="admin" class="admin-actions container">
-    <div class="center">
-      <form @submit.prevent="addAdmin">
-        <input type="email" placeholder="User Email" v-model="email" required>
-        <div v-if="loading" class="progress">
-          <div class="indeterminate"></div>
-        </div>
-        <p v-if="feedback">{{ feedback }}</p>
-        <button class="btn-small yellow darken-2 z-depth-0">Make Admin</button>
-      </form>
-    </div>
-  </div>
+  <v-flex xs-12 md-4>
+    <v-card v-if="admin" width="600" class=" text-center mx-auto my-2">
+      <v-card-title>
+        <h3>Make Admin</h3>
+      </v-card-title>
+      <v-card-text>
+        <v-form @submit.prevent="addAdmin">
+          <v-text-field type="email" label="Email" v-model="email" />
+          <user-feedback v-model="fbShow" :type="fbType">{{ fbMsg }}</user-feedback>
+        </v-form>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="success" :loading="loading">Make Admin</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-flex>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase/app'
 import 'firebase/functions'
+import UserFeedback from '@/components/UserFeedback'
 
 export default {
   name: 'AdminActions',
   data () {
     return {
       email: '',
-      feedback: null,
-      loading: null
+      fbShow: false,
+      fbType: 'info',
+      fbMsg: '',
+      loading: false
     }
   },
   computed: {
@@ -33,19 +40,26 @@ export default {
   methods: {
     addAdmin () {
       this.loading = true
-      this.feedback = null
+      this.fbShow = false
       // use our makeAdminRole firebase function defined in functions/index.js
       const addAdminRole = firebase.functions().httpsCallable('addAdminRole')
       addAdminRole({ email: this.email }).then(result => {
         this.loading = false
-        this.feedback = result.data.message
+        this.fbType = 'success'
+        this.fbMsg = result.data.message
+        this.fbShow = true
         this.email = ''
       }).catch(err => {
         console.log(err)
         this.loading = false
-        this.feedback = err.message
+        this.fbType = 'error'
+        this.errorMsg = err.message
+        this.fbShow = true
       })
     }
+  },
+  components: {
+    UserFeedback
   }
 }
 </script>
