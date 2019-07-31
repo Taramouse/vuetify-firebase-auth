@@ -1,53 +1,70 @@
 <template>
-  <div id="login" class="container">
-    <div class="card-panel center">
-      <h4>Login</h4><br />
-      <form id="login-form" @submit.prevent="login">
-        <div class="input-field">
-          <input type="email" id="login-email" v-model="email" required />
-          <label for="login-email">Email address</label>
-        </div>
-        <div class="input-field">
-          <input type="password" id="login-password" v-model="password" required />
-          <label for="login-password">Your password</label>
-        </div>
-        <p v-if="feedback" class="red-text">{{ feedback }}</p>
-        <button class="btn yellow darken-2 z-depth-0">Login</button>
-      </form>
-    </div>
-  </div>
+  <v-card width="400"
+          class="mx-auto mt-5">
+    <v-card-title class="pb-10">
+      <h1>Login</h1>
+    </v-card-title>
+    <v-card-text>
+      <v-form>
+        <v-text-field v-model="email"
+                      type="email"
+                      label="Email"
+                      prepend-icon="mdi-account-circle" />
+        <v-text-field v-model="password"
+                      :type="showPassword ? 'text' : 'password'"
+                      label="Password"
+                      prepend-icon="mdi-lock"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword" />
+      </v-form>
+      <user-feedback :show="fbShow"
+                     :type="fbType"
+                     :message="fbMsg">
+      </user-feedback>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn @click="login"
+             color="success">Login</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 // eslint-disable-next-line
 import EventBus from '@/eventBus'
+import UserFeedback from '@/components/UserFeedback'
 
 export default {
   name: 'Login',
   data () {
     return {
+      showPassword: false,
       email: null,
       password: null,
-      feedback: null
+      fbShow: false,
+      fbType: 'info',
+      fbMsg: 'User feedback'
     }
   },
   methods: {
     login () {
+      this.fbShow = false
       this.$auth.login(this.email, this.password)
       EventBus.$on('ERROR_MESSAGE', payload => {
-        this.feedback = payload
-        if (!this.feedback) {
+        this.fbMsg = payload
+        this.fbType = 'error'
+        this.fbShow = true
+        if (!this.fbMsg) {
           this.$router.push({ name: 'Home' })
         }
       })
     }
+  },
+  components: {
+    UserFeedback
   }
 }
 </script>
 
 <style>
-#login {
-  padding-top: 30px;
-  width: 500px;
-}
 </style>
