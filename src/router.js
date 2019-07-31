@@ -19,7 +19,7 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "Signup" */ '@/components/Signup.vue')
+      component: () => import(/* webpackChunkName: "Signup" */ '@/views/Signup.vue')
     },
     {
       path: '/login',
@@ -27,7 +27,7 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "Login" */ '@/components/Login.vue')
+      component: () => import(/* webpackChunkName: "Login" */ '@/views/Login.vue')
     },
     {
       path: '/account',
@@ -38,7 +38,7 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "Account" */ '@/components/Account.vue')
+      component: () => import(/* webpackChunkName: "Account" */ '@/views/Account.vue')
 
     },
     {
@@ -50,7 +50,7 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "CreateGuide" */ '@/components/CreateGuide.vue')
+      component: () => import(/* webpackChunkName: "CreateGuide" */ '@/views/CreateGuide.vue')
     }
   ]
 })
