@@ -1,17 +1,28 @@
 <template>
-  <v-flex xs-12 md-4>
-    <v-card v-if="admin" width="600" class=" text-center mx-auto my-2">
+  <v-flex xs-12
+          md-4>
+    <v-card v-if="admin"
+            width="600"
+            class=" text-center mx-auto my-2">
       <v-card-title>
-        <h3>Make Admin</h3>
+        <h3 class="grey--text">Make Admin</h3>
       </v-card-title>
       <v-card-text>
-        <v-form @submit.prevent="addAdmin">
-          <v-text-field type="email" label="Email" v-model="email" />
-          <user-feedback v-model="fbShow" :type="fbType">{{ fbMsg }}</user-feedback>
+        <v-form>
+          <v-text-field type="email"
+                        label="Email"
+                        v-model="email" />
         </v-form>
+        <user-feedback :show="fbShow"
+                       :type="fbType"
+                       :message="fbMsg"
+                       dismisible="true">
+        </user-feedback>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="success" :loading="loading">Make Admin</v-btn>
+        <v-btn @click="addAdmin"
+               :loading="loading"
+               color="info">Make Admin</v-btn>
       </v-card-actions>
     </v-card>
   </v-flex>
@@ -53,7 +64,7 @@ export default {
         console.log(err)
         this.loading = false
         this.fbType = 'error'
-        this.errorMsg = err.message
+        this.fbMsg = err
         this.fbShow = true
       })
     }
@@ -65,8 +76,4 @@ export default {
 </script>
 
 <style>
-.admin-actions {
-  margin: 40px auto;
-  max-width: 300px;
-}
 </style>

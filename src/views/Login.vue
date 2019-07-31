@@ -1,7 +1,7 @@
 <template>
   <v-card width="400"
           class="mx-auto mt-5">
-    <v-card-title class="pb-10 text-center">
+    <v-card-title class="pb-10">
       <h1 class="display-1 grey--text">Login</h1>
     </v-card-title>
     <v-card-text>
@@ -9,13 +9,15 @@
         <v-text-field v-model="email"
                       type="email"
                       label="Email"
-                      prepend-icon="mdi-account-circle" />
+                      prepend-icon="mdi-account-circle"
+                      autocomplete="username" />
         <v-text-field v-model="password"
                       :type="showPassword ? 'text' : 'password'"
                       label="Password"
                       prepend-icon="mdi-lock"
                       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="showPassword = !showPassword" />
+                      @click:append="showPassword = !showPassword"
+                      autocomplete="current-password" />
       </v-form>
       <user-feedback :show="fbShow"
                      :type="fbType"
@@ -24,6 +26,7 @@
     </v-card-text>
     <v-card-actions>
       <v-btn @click="login"
+             :loading="loading"
              color="success">Login</v-btn>
     </v-card-actions>
   </v-card>
@@ -38,6 +41,7 @@ export default {
   name: 'Login',
   data () {
     return {
+      loading: false,
       showPassword: false,
       email: null,
       password: null,
@@ -49,8 +53,10 @@ export default {
   methods: {
     login () {
       this.fbShow = false
+      this.loading = true
       this.$auth.login(this.email, this.password)
       EventBus.$on('ERROR_MESSAGE', payload => {
+        this.loading = false
         this.fbMsg = payload
         this.fbType = 'error'
         this.fbShow = true
