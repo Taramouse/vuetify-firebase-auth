@@ -8,7 +8,6 @@
         </h1>
         <p v-if="!user">Please log in or sign up to see our guides</p>
       </v-flex>
-      <AdminActions />
       <GuideList />
     </v-layout>
   </v-container>
@@ -16,14 +15,12 @@
 
 <script>
 // @ is an alias to /src
-import AdminActions from '@/components/AdminActions'
 import GuideList from '@/components/GuideList'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
   components: {
-    AdminActions,
     GuideList
   },
   computed: {
