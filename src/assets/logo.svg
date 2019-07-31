@@ -22,7 +22,7 @@
       }
 
       .cls-6 {
-        fill: #616161;
+        fill: #fff;
       }
     </style>
     <linearGradient id="linear-gradient" x1="0.406" y1="0.469" x2="0.981" y2="1.102" gradientUnits="objectBoundingBox">
