@@ -1,5 +1,10 @@
 <template>
-  <v-alert v-model="show" :closeText="closeText" :color="color" :theme='theme' :dismissible="dismissible" :type="type"></v-alert>
+  <v-alert v-model="show"
+           :closeText="closeText"
+           :color="color"
+           :theme='theme'
+           :dismissible="dismissible"
+           :type="type">{{ message }}</v-alert>
 </template>
 
 <script>
@@ -28,6 +33,10 @@ export default {
     'type': {
       type: String,
       default: 'info'
+    },
+    'message': {
+      type: String,
+      default: 'User Feedback Component'
     }
   }
 }
