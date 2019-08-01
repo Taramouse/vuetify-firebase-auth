@@ -1,29 +1,12 @@
 <template>
-  <v-flex xs-12 md-4 left>
-    <v-card v-if="user" width="600" class="mx-auto" :loading="loading">
-      <v-card-title>
-        <h3>Game Guides</h3>
-      </v-card-title>
-      <v-card-text>
-        <v-list>
-          <v-list-group v-for="(guide, index) in guides" :key="index" no-action>
-
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title v-text="guide.title"></v-list-item-title>
-              </v-list-item-content>
-            </template>
-
-            <v-list-item class="px-10">
-              <v-list-item-content>
-                <p v-text="guide.content"></p>
-              </v-list-item-content>
-            </v-list-item>
-
-          </v-list-group>
-        </v-list>
-      </v-card-text>
-    </v-card>
+  <v-flex xs-12>
+    <v-expansion-panels accordion>
+      <v-expansion-panel v-for="(guide, index) in guides"
+                         :key="index">
+        <v-expansion-panel-header>{{guide.title}}</v-expansion-panel-header>
+        <v-expansion-panel-content>{{guide.content}}</v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-flex>
 </template>
 
