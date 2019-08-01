@@ -1,5 +1,6 @@
 <template>
-  <v-app id="app">
+  <v-app :dark="useDarkTheme"
+         id="app">
     <Navbar />
     <v-content>
       <router-view />
@@ -11,6 +12,11 @@ import Navbar from '@/components/Navbar'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      useDarkTheme: false
+    }
+  },
   components: {
     Navbar
   }

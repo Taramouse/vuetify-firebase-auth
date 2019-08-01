@@ -1,27 +1,42 @@
 <template>
-  <v-app-bar color="deep-purple accent-4" dark>
+  <v-app-bar color="deep-purple accent-4"
+             dark>
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title>
       <router-link :to="{name: 'Home' }">
-        <v-img src="@/assets/logo.svg" alt="logo" width="180"></v-img>
+        <v-img src="@/assets/logo.svg"
+               alt="logo"
+               width="180"></v-img>
       </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text v-if="user" :to="{ name: 'Account' }">
+    <v-btn text
+           v-if="user"
+           :to="{ name: 'Account' }">
       <span class="mr-2">Account</span>
     </v-btn>
-    <v-btn text v-if="admin" :to="{ name: 'CreateGuide' }">
+    <v-btn text
+           v-if="admin"
+           :to="{ name: 'CreateGuide' }">
       <span class="mr-2">Create Guide</span>
     </v-btn>
-    <v-btn text v-if="user" @click.prevent="logout">
+    <v-btn text
+           v-if="user"
+           @click.prevent="logout">
       <span class="mr-2">Logout</span>
     </v-btn>
-    <v-btn text v-if="!user" :to="{ name: 'Signup' }">
+    <v-btn text
+           v-if="!user"
+           :to="{ name: 'Signup' }">
       <span class="mr-2">Sign Up</span>
     </v-btn>
-    <v-btn text v-if="!user" :to="{ name: 'Login' }">
+    <v-btn text
+           v-if="!user"
+           :to="{ name: 'Login' }">
       <span class="mr-2">Login</span>
     </v-btn>
+    <v-switch :label="'Dark Theme'"
+              v-model="useDarkTheme"></v-switch>
   </v-app-bar>
 </template>
 
@@ -33,7 +48,7 @@ export default {
   name: 'Navbar',
   data () {
     return {
-
+      useDarkTheme: true
     }
   },
   methods: {
@@ -43,7 +58,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user', 'admin'])
+    ...mapGetters(['user', 'admin']),
+    setTheme () {
+      if (this.useDarkTheme) {
+        // eslint-disable-next-line
+        return (this.$vuetify.theme.dark = true)
+      } else {
+        // eslint-disable-next-line
+        return (this.$vuetify.theme.dark = false)
+      }
+    }
   }
 }
 </script>
