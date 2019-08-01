@@ -1,14 +1,15 @@
 <template>
-  <v-container align-center>
-    <v-layout text-center
-              wrap>
-      <v-flex mb-4>
+  <v-container>
+    <v-layout>
+      <v-flex xs-12
+              text-center>
         <h1 class="display-2 grey--text mb-3">
-          Welcome to Game Guidez
+          Game Guidez
         </h1>
         <p v-if="!user">Please log in or sign up to see our guides</p>
+
+        <GuideList />
       </v-flex>
-      <GuideList />
     </v-layout>
   </v-container>
 </template>
