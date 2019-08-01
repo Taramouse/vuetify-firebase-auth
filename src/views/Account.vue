@@ -1,21 +1,35 @@
 <template>
-  <div id="account" class="container">
-    <div class="card-panel center">
-      <h4>Account details</h4>
-      <br />
-      <div class="account-details">
-        <div v-if="user" class="left-align">
-          <h4 class="grey-text">User: <span class="grey-text text-darken-2 right">{{ user.email }}</span></h4>
-          <h4 class="grey-text">Bio: <span class="grey-text text-darken-2 right">{{ bio }}</span></h4>
-          <h4 class="grey-text">Member Status: <span class="grey-text text-darken-2 right">{{ adminStatus }}</span></h4>
-          <p v-if="feedback" class="red-text">{{ feedback }}</p>
-        </div>
-        <div v-if="!user">
-          <h4 class="red-text">No user logged in</h4>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-container>
+    <v-layout>
+      <v-flex xs-12>
+        <v-card v-if="user">
+          <v-card-text>
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>User</v-list-item-title>
+                <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Bio</v-list-item-title>
+                <v-list-item-subtitle>{{ bio }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>User Status</v-list-item-title>
+                <v-list-item-subtitle>{{ user.admin }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card-text>
+          <v-card-text v-if="!user">
+            <h4 class="red-text">No user logged in</h4>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
