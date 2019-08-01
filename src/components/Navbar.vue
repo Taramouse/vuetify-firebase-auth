@@ -35,8 +35,9 @@
            :to="{ name: 'Login' }">
       <span class="mr-2">Login</span>
     </v-btn>
-    <v-switch :label="'Dark Theme'"
-              v-model="useDarkTheme"></v-switch>
+    <v-switch class="mt-7"
+              :label="'Dark Theme'"
+              v-model="theme.isDark"></v-switch>
   </v-app-bar>
 </template>
 
@@ -48,7 +49,7 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      useDarkTheme: true
+      theme: { isDark: true }
     }
   },
   methods: {
@@ -60,7 +61,7 @@ export default {
   computed: {
     ...mapGetters(['user', 'admin']),
     setTheme () {
-      if (this.useDarkTheme) {
+      if (this.theme.isDark) {
         // eslint-disable-next-line
         return (this.$vuetify.theme.dark = true)
       } else {

@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="useDarkTheme"
+  <v-app :dark="theme.isDark"
          id="app">
     <Navbar />
     <v-content>
@@ -14,7 +14,7 @@ export default {
   name: 'App',
   data () {
     return {
-      useDarkTheme: false
+      theme: { isDark: false }
     }
   },
   components: {
